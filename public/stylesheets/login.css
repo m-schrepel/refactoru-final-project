@@ -1,0 +1,38 @@
+#fblogin {
+	width: 200px;
+	display: block;
+	margin: auto;
+}
+#googlelogin {
+	width: 200px;
+	display: block;
+	margin: auto;
+
+}
+.darkbox {
+	background-color: #708090;
+	max-width: 300px;
+	margin: auto;
+}
+.nav-g {
+	background-color: #708090;
+	padding: 10px;
+}
+#site-name-nav {
+	font-size: 2em;
+	color: #FFF;
+	line-height: 2.65em
+}
+input {
+	width: 194px;
+	display: block;
+	margin: auto;
+	margin-top: 5px;
+	height: 30px;
+	text-align: center;
+	border-radius: 10px;
+	border: 1px solid #F56D18;
+}
+body {
+	background-color: #d3d3d3;
+}

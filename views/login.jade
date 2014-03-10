@@ -1,0 +1,22 @@
+extends login-layout
+block content
+	title #{title}
+	nav.nav-g.nav.stats
+			ul
+				li 
+					img(src="/images/trucklrg.png")
+				li(id="site-name-nav") Ping a Truck
+	.darkbox
+		ul.instruction-list
+			li.instructions
+				| Login
+				a(href='/login/facebook')
+					img(id='fblogin' src='/images/login-facebook.png')
+				a(href='/auth/google')
+					img(id='googlelogin' src='/images/login-google.png')
+			li.instructions
+				| When do you want to eat
+				img(src='/images/timebar.png')
+			li.instructions
+				| Where are you going to be
+				img(src='/images/map.png')
