@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	div(id='notify-window')
+		ul(id="notify-list")
+	nav.nav-g.nav.stats
+			ul
+				li 
+					a(href='/login')
+						img(id='ping-a-truck' src="/images/trucklrg.png")
+				li(id="site-name-nav") Ping a Truck
+				li(id="notify-right")
+					a(href="#" id="notify-label" class="label label-orange") 0
+					span(id="notify-text") Notifications | <a href='/logout' id='logout'> Logout
+					
+		.units-row
+			.unit-centered.unit-80
+				div(id='map-canvas')
+				div(id='slider-el')

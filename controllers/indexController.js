@@ -11,6 +11,17 @@ module.exports = {
 		res.render('vendorBenefits');
 	},
 	foodTruckCreate: function(req, res){
+		req.user.vendor = 2;
+		req.user.form = req.body;
+		req.user.save();
+		if(req.user.form){
+			res.render('protectedvendor');
+		}
+		else {
+			res.send('The form didn\'t submit properly')
+		}
+	},
+	formrender: function(req,res){
 		res.render('signup');
 	}
 };

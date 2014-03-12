@@ -36,6 +36,9 @@ passport.use(new GoogleStrategy({
 },
    function(accessToken, refreshToken, profile, done) {
  		UserModel.findOne({ userid: profile.id }, function (err, user) {
+ 			if(user){
+ 				return done(err, user);
+ 			}
  			var newUser = new UserModel({
 				userid: profile.id,
   				username: profile.displayName,

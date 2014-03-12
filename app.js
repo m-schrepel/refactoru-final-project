@@ -52,7 +52,7 @@ app.get('/vendor/auth/google', function (req, res, next) {
 	'https://www.googleapis.com/auth/userinfo.profile', 
 	'https://www.googleapis.com/auth/userinfo.email']}));
 app.get('/signup', indexController.signup);
-app.get('/signupform', indexController.foodTruckCreate);
+app.get('/signupform', indexController.formrender);
 app.get('/', authController.ensureAuthenticated, indexController.login);
 app.get('/login', authController.login);
 app.get('/logout', authController.logout);
@@ -69,8 +69,8 @@ app.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect
 		else if (req.session.vendor===2) {
 			res.redirect('/vendorviewonly');
 		}
-		res.redirect('/user');
-	});
+		res.redirect('/user');	
+});
 app.get('/user', authController.ensureAuthenticated, indexController.user);
 app.get('/auth/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login', 
 	'https://www.googleapis.com/auth/userinfo.profile', 
@@ -89,7 +89,7 @@ app.get('/oauth2callback',
     	res.redirect('/vendorviewonly');
     }
     res.redirect('/user');
-  });
+});
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
