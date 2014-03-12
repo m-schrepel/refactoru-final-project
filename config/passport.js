@@ -46,5 +46,5 @@ passport.use(new GoogleStrategy({
 				return done(err, doc);
   			});
       });
-   }
+    }
 ));

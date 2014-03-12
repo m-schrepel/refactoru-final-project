@@ -24,6 +24,7 @@
 	width: 200px;
 	display: block;
 	margin: auto;
+	margin-bottom: 3px;
 }
 #signup {
 	margin: auto;
@@ -39,7 +40,8 @@
 	max-width: 400px;
 	margin: auto;
 	border-radius: 15px;
-	border: 1px solid #4862b4;
+	border: 1px solid #f56d18;
+	color: #FFF;
 }
 .nav-g {
 	background-color: #708090;
@@ -51,6 +53,16 @@
 	color: #FFF;
 	line-height: 2.75em
 }
+.forms {
+	margin: 1em;
+}
+.width-75 {
+	border-radius: 10px;
+	font-size: 1em;
+}
+.bigger {
+	font-size: 2em;
+}
 @media (max-width: 500px) {
 	#ping-a-truck {
 		height: 40px;
@@ -60,9 +72,12 @@
 		font-size: 1em;
 	}
 	.instructions {
-		font-size: .85em
+		font-size: .85em;
 	}
+	.notype {
+		list-style-type: none;
 	}
+}
 body {
 	background-color: #d3d3d3;
 }

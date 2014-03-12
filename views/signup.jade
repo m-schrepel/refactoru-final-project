@@ -1,0 +1,22 @@
+extends login-layout
+block content
+	title Food Truck Sign Up
+	nav.nav-g.nav.stats
+				ul
+					li 
+						a(href='/')
+							img(id='ping-a-truck' src="/images/trucklrg.png")
+					li(id="site-name-nav") Ping a Truck 
+		.darkbox
+		form(method='post' action='/truck-submit' class='forms')
+			label
+				input(class='width-75 centered' type='text' name='food-truck-name' placeholder='Food Truck Name' required)
+				p
+				input(class='width-75 centered' type='email' name='food-truck-email' placeholder='Email Address' required)
+				p
+				input(class='width-75 centered' type='tel' name='food-truck-number' placeholder='Phone Number' required)
+				p
+				input(class='width-75 centered' type='text' name='food-truck-cuisine' placeholder='Cuisine Type' required)
+				p
+				input(class='width-75 centered' type='url' name='food-truck-url' placeholder='http://www.YourSite.com')
+			button(class='btn width-75 btn-orange centered' type='submit' value='Submit') Submit
