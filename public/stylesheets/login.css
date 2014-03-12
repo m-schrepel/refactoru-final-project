@@ -1,3 +1,20 @@
+.instruction-images {
+	margin: auto;
+	max-width: 95%;
+	border: 1px solid #f56d18;
+	display: block;
+	opacity: .65;
+}
+.instruction-list {
+	list-style-type: none;
+}
+.instructions {
+	text-align: center;
+	font-style: bold;
+	color: #FFF;
+	font-size: 1.2em;
+	margin-top: 1em;
+}
 #fblogin {
 	width: 200px;
 	display: block;
@@ -7,32 +24,45 @@
 	width: 200px;
 	display: block;
 	margin: auto;
-
+}
+#signup {
+	margin: auto;
+	width: 193px;
+	display: block;
+	height: 40px;
+	margin-top: 3px;
+	margin-bottom: 5px;
+	border-radius: 5px;
 }
 .darkbox {
 	background-color: #708090;
-	max-width: 300px;
+	max-width: 400px;
 	margin: auto;
+	border-radius: 15px;
+	border: 1px solid #4862b4;
 }
 .nav-g {
 	background-color: #708090;
-	padding: 10px;
+	padding: 5px;
+	border-bottom: 2px solid #f56d18;
 }
 #site-name-nav {
 	font-size: 2em;
 	color: #FFF;
-	line-height: 2.65em
+	line-height: 2.75em
 }
-input {
-	width: 194px;
-	display: block;
-	margin: auto;
-	margin-top: 5px;
-	height: 30px;
-	text-align: center;
-	border-radius: 10px;
-	border: 1px solid #F56D18;
-}
+@media (max-width: 500px) {
+	#ping-a-truck {
+		height: 40px;
+		width: 40px;
+		}
+	#site-name-nav {
+		font-size: 1em;
+	}
+	.instructions {
+		font-size: .85em
+	}
+	}
 body {
 	background-color: #d3d3d3;
 }

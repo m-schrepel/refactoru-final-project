@@ -6,7 +6,7 @@ html {
 	width: 100%;
 }
 #map-canvas {
-	height: 70vh;
+	height: 55vh;
 	width: 100%;
 	border: 2px solid #F56D18;
 }
@@ -15,6 +15,7 @@ html {
 }
 #slider-el {
 	width: 100%;
+	margin-top: 5px;
 
 }	
 .units-row {
@@ -88,7 +89,7 @@ html {
 	display: inline-block;
 	text-align: right;
 }
-@media (max-width: 768px) {
+@media (max-width: 500px) {
 		#notify-window {
 			position: absolute;
 			right:5px;
@@ -106,5 +107,23 @@ html {
 		#slider-el {
 			width: 85%;
 			margin: auto;
+		}
+		#ping-a-truck {
+			height: 40px;
+			width: 40px;
+			margin-top: 10px;
+		}
+		#site-name-nav {
+			display:inline-block;
+			font-size: .85em;
+		}
+		#notify-text {
+			font-size: .85em;
+		}
+		#logout {
+			font-size: .85em;
+		}
+		#notify-right {
+			padding-top: .9em;
 		}
 }
