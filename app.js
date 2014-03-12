@@ -60,9 +60,14 @@ app.get('/logout', authController.logout);
 app.get('/login/facebook', passport.authenticate('facebook'));
 app.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/login'}),
 	function(req,res){
+		console.log(req.user);
 		console.log(req.session.vendor);
 		if (req.session.vendor) {
-			res.redirect('/signupform');
+			req.user.vendor = req.session.vendor;
+			req.user.save(function() {
+				res.redirect('/signupform')
+			});					
+			return null;
 		}
 		res.redirect('/user');
 	});
@@ -74,8 +79,12 @@ app.get('/oauth2callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
   	console.log(req.session.vendor);
-    if (req.session.vendor){
-    	res.redirect('/signupform');
+    if (req.session.vendor) {
+			req.user.vendor = req.session.vendor;
+			req.user.save(function() {
+				res.redirect('/signupform')
+			});		
+    	return null;
     }
     res.redirect('/user');
   });
