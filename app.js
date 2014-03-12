@@ -9,7 +9,6 @@ var authController = require('./controllers/authController');
 var app = express();
 var MongoStore = require('connect-mongo')(express);
 
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -60,14 +59,15 @@ app.get('/logout', authController.logout);
 app.get('/login/facebook', passport.authenticate('facebook'));
 app.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/login'}),
 	function(req,res){
-		console.log(req.user);
-		console.log(req.session.vendor);
-		if (req.session.vendor) {
+		if (req.session.vendor===1) {
 			req.user.vendor = req.session.vendor;
 			req.user.save(function() {
-				res.redirect('/signupform')
+				res.redirect('/signupform');
 			});					
 			return null;
+		}
+		else if (req.session.vendor===2) {
+			res.redirect('/vendorviewonly');
 		}
 		res.redirect('/user');
 	});
@@ -78,13 +78,15 @@ app.get('/auth/google', passport.authenticate('google', {scope: ['https://www.go
 app.get('/oauth2callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-  	console.log(req.session.vendor);
-    if (req.session.vendor) {
+    if (req.session.vendor===1) {
 			req.user.vendor = req.session.vendor;
 			req.user.save(function() {
-				res.redirect('/signupform')
+				res.redirect('/signupform');
 			});		
-    	return null;
+    		return null;
+    }
+    else if (req.session.vendor===2) {
+    	res.redirect('/vendorviewonly');
     }
     res.redirect('/user');
   });

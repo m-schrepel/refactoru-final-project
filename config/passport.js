@@ -22,7 +22,7 @@ passport.use(new FacebookStrategy({
 		var newUser = new UserModel({
 			userid: profile.id,
 			username: profile.username,
-			profile: profile
+			profile: profile,
 		});
 		newUser.save(function(err, doc){
 			return done(err, doc);
