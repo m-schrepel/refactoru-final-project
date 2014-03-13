@@ -15,7 +15,7 @@ module.exports = {
 		req.user.form = req.body;
 		req.user.save();
 		if(req.user.form){
-			res.render('protectedvendor');
+			res.redirect('/vendor2');
 		}
 		else {
 			res.send('The form didn\'t submit properly')
@@ -23,5 +23,11 @@ module.exports = {
 	},
 	formrender: function(req,res){
 		res.render('signup');
+	},
+	vendor2: function(req, res){
+		res.render('protectedvendor')
+	},
+	vendor3: function(req, res){
+		res.render('fullvendor')
 	}
 };

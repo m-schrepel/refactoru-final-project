@@ -18,7 +18,6 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-
 app.use(express.cookieParser());
 app.use(express.session({
 	store: new MongoStore({
@@ -34,21 +33,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res){
 	res.render('404.jade');
 });
-
-
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 app.post('/truck-submit', indexController.foodTruckCreate);
-app.get('/vendor/login/facebook', function (req, res, next) {
-	req.session.vendor = 1;
-	next();
-}, 	passport.authenticate('facebook'));
-app.get('/vendor/auth/google', function (req, res, next) {
-	req.session.vendor = 1;
-	next();
-}, passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login', 
+app.get('/vendor2', indexController.vendor2);
+app.get('/vendor/login/facebook', authController.securityElevate, passport.authenticate('facebook'));
+app.get('/vendor/auth/google', authController.securityElevate, passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login', 
 	'https://www.googleapis.com/auth/userinfo.profile', 
 	'https://www.googleapis.com/auth/userinfo.email']}));
 app.get('/signup', indexController.signup);
@@ -57,39 +49,13 @@ app.get('/', authController.ensureAuthenticated, indexController.login);
 app.get('/login', authController.login);
 app.get('/logout', authController.logout);
 app.get('/login/facebook', passport.authenticate('facebook'));
-app.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/login'}),
-	function(req,res){
-		if (req.session.vendor===1) {
-			req.user.vendor = req.session.vendor;
-			req.user.save(function() {
-				res.redirect('/signupform');
-			});					
-			return null;
-		}
-		else if (req.session.vendor===2) {
-			res.redirect('/vendorviewonly');
-		}
-		res.redirect('/user');	
-});
+app.get('/facebook/callback', passport.authenticate('facebook', {failureRedirect: '/login'}), authController.redirectCheck);
 app.get('/user', authController.ensureAuthenticated, indexController.user);
 app.get('/auth/google', passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login', 
 	'https://www.googleapis.com/auth/userinfo.profile', 
 	'https://www.googleapis.com/auth/userinfo.email']}));
 app.get('/oauth2callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    if (req.session.vendor===1) {
-			req.user.vendor = req.session.vendor;
-			req.user.save(function() {
-				res.redirect('/signupform');
-			});		
-    		return null;
-    }
-    else if (req.session.vendor===2) {
-    	res.redirect('/vendorviewonly');
-    }
-    res.redirect('/user');
-});
+  passport.authenticate('google', { failureRedirect: '/login' }), authController.redirectCheck);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
