@@ -11,7 +11,8 @@
     "mongoose": "~3.8.8",
     "passport": "~0.2.0",
     "passport-facebook": "~1.0.3",
-    "passport-google-oauth": "~0.1.4"
+    "passport-google-oauth": "~0.1.4",
+    "aws-sdk": "^2.0.0-rc11"
   },
   "devDependencies": {
     "connect-mongo": "~0.4.0"

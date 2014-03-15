@@ -8,6 +8,11 @@ var indexController = require('./controllers/indexController');
 var authController = require('./controllers/authController');
 var app = express();
 var MongoStore = require('connect-mongo')(express);
+var AWS = require('aws-sdk'); 
+
+AWS.config.loadFromPath('./config.json');
+
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
