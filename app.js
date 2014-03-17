@@ -29,7 +29,7 @@ app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({
 	store: new MongoStore({
-		url: 'mongodb://localhost/foodTruckUsers',
+		url: MONGOHQ_URL,
 		collection: 'users'
 	}),
 	secret: 'M0nk3y4SS'}));
