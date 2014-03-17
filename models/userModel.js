@@ -8,7 +8,10 @@ var userSchema = new mongoose.Schema({
 	text: String,
 	profile: Object,
 	vendor: Number,
-	where: String,
+	where: {
+		lat: String,
+		lng: String
+	},
 	startTime: String,
 	endTime: String,
 	form: {}

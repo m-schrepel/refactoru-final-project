@@ -40,6 +40,7 @@ app.use(function(req, res){
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+app.post('/dbsubmit', indexController.dbSave);
 app.post('/truck-submit', indexController.foodTruckCreate);
 app.get('/vendor2', indexController.vendor2);
 app.get('/vendor/login/facebook', authController.securityElevate, passport.authenticate('facebook'));

@@ -29,5 +29,16 @@ module.exports = {
 	},
 	vendor3: function(req, res){
 		res.render('fullvendor')
+	},
+	dbSave: function(req, res){
+		console.log(req.body);
+		req.user.where = req.body.where
+		req.user.startTime = req.body.start
+		req.user.endTime = req.body.end
+		req.user.save(function(err, doc) {
+			res.send(doc);
+
+		});
+
 	}
 };
