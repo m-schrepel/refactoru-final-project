@@ -16,5 +16,12 @@
   },
   "devDependencies": {
     "connect-mongo": "~0.4.0"
+  },
+  "repository": {
+    "type":"git",
+    "url": "https://github.com/m-schrepel/refactoru-final-project.git"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
