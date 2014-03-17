@@ -165,7 +165,6 @@ function initialize() {
         strokeOpacity: 0
       })
       currentCircles.push(circles);
-  
     };
   });
 }

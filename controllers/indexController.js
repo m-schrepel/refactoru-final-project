@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+var UserModel = require('../models/userModel');
 module.exports = {
 	login: function(req, res){
 		res.render('login', {
@@ -32,13 +34,19 @@ module.exports = {
 	},
 	dbSave: function(req, res){
 		console.log(req.body);
-		req.user.where = req.body.where
-		req.user.startTime = req.body.start
-		req.user.endTime = req.body.end
+		req.user.where = req.body.where;
+		req.user.startTime = req.body.start;
+		req.user.endTime = req.body.end;
 		req.user.save(function(err, doc) {
 			res.send(doc);
 
 		});
 
+	},
+	dbGet: function(req, res){
+		console.log('req.user.id:', req.user._id);
+		UserModel.findById(req.user._id, function(err,doc){
+			res.send(doc);
+		});
 	}
 };

@@ -4,7 +4,9 @@ var UserModel = require('../models/userModel')
 var userSchema = new mongoose.Schema({
 	userid: String,
 	username: String,
+	notifyEmail: Boolean,
 	email: String,
+	notifyText: Boolean,
 	text: String,
 	profile: Object,
 	vendor: Number,

@@ -5,6 +5,42 @@ html {
 	height: 100%;
 	width: 100%;
 }
+.btn-centered{
+	margin: auto;
+	display: block;
+}
+.tab{
+	position: fixed;
+	height:10%;
+	width: 10%;
+	background-color: #000;
+	bottom: 0;
+	left: 50%;
+}
+.notification-slider {
+	background-color: #708090;
+	position: fixed;
+	bottom: 0%;
+	left: 0;
+	width: 100%;
+	padding-bottom: 20px;
+	color: #FFF;
+	border-top: 2px solid #F56d18;
+	max-height: 17%;
+	display: none;
+}
+.notification-slider input {
+	text-align: center;
+	margin: auto;
+}
+#error {
+	height: 5%;
+	background-color: #F00;
+	color: white;
+	text-align: center;
+	-webkit-animation: pulse 3s;
+	display: none;
+}
 #map-canvas {
 	height: 55vh;
 	width: 100%;
