@@ -45,6 +45,7 @@ app.use(function(req, res){
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+app.get('/dbDraw', indexController.dbDraw);
 app.get('/dbGet', indexController.dbGet);
 app.post('/dbsubmit', indexController.dbSave);
 app.post('/truck-submit', indexController.foodTruckCreate);
