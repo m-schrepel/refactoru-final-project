@@ -53,7 +53,7 @@ module.exports = {
 		UserModel.find({ 
 			endTime: {$exists: true}, 
 			startTime: {$exists: true}, 
-			where: {$exists: true},
+			where: {$exists: true}},
 			{endTime: true, startTime: true, where: true}, 
 			function(err, doc){
 			console.log(doc);
