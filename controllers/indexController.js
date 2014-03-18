@@ -48,5 +48,10 @@ module.exports = {
 		UserModel.findById(req.user._id, function(err,doc){
 			res.send(doc);
 		});
+	},
+	dbDraw: function(req, res){
+		UserModel.find({ endTime: {$exists: true}, startTime: {$exists: true}, where: {$exists: true}},{ endTime: true, startTime: true, where: true}, function(err, doc){
+			console.log(doc);
+		});
 	}
 };

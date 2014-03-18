@@ -20,6 +20,9 @@ function initialize(e) {
     var userName = doc.profile.displayName;
     $('#notify-text').text('Welcome '+userName)
   });
+  $.get('/dbDraw', function(doc, err){
+    console.log(doc);
+  });
   var mapOptions = {
     center: new google.maps.LatLng(37.77, -122.42),
     zoom: 13,
