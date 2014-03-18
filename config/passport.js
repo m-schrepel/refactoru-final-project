@@ -11,8 +11,8 @@ passport.deserializeUser(function(userid, done){
 	});
 });
 passport.use(new FacebookStrategy({
-	clientID: '524785800972097',
-	clientSecret: '1c0a3b9d4b50b6f9c8f24f2e27793e04',
+	clientID: '725944494103833',
+	clientSecret: 'ac103298f55808bc0ec40f03a5e370b4',
 	callbackURL: 'http://ping-a-truck.herokuapp.com//facebook/callback'
 }, function(accessToken, refreshToken, profile, done){
 	UserModel.findOne({userid: profile.id}, function(err, user){
@@ -30,8 +30,8 @@ passport.use(new FacebookStrategy({
 	});
 }));
 passport.use(new GoogleStrategy({
-    clientID: '844209823006.apps.googleusercontent.com',
-    clientSecret: 'LSJoJGZmk_0ex33Rxhki8gtd',
+    clientID: '844209823006-gb7frebb3m46gqj718vt182p84459oag.apps.googleusercontent.com',
+    clientSecret: 'kNLh22GllE4WCi7sADI1FZWo',
     callbackURL: "http://ping-a-truck.herokuapp.com/oauth2callback"
 },
    function(accessToken, refreshToken, profile, done) {
