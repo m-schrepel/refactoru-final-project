@@ -27,7 +27,10 @@ module.exports = {
 		res.send(401);
 	},
 	redirectCheck: function(req, res){
-	  	if (req.user.form) {
+	  	if (req.user.vendor === 3) {
+	  		res.redirect('/vendor3')
+	  	}
+	  	else if (req.user.form || req.user.vendor === 2) {
 	  		res.redirect('/vendor2');
 	  	}
 	  	else if (req.user.vendor===1 || req.session.vendor === 1) {
@@ -36,12 +39,6 @@ module.exports = {
 					res.redirect('/signupform');
 				});		
 	    		return null;
-	    }
-	    else if (req.user.vendor === 2 || req.user.form) {
-	    	res.redirect('/vendor2');
-	    }
-	    else if (req.user.vendor === 3) {
-	    	res.redirect('/vendor3')
 	    }
 	    else {
 	    res.redirect('/user');
