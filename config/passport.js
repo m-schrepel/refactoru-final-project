@@ -13,7 +13,7 @@ passport.deserializeUser(function(userid, done){
 passport.use(new FacebookStrategy({
 	clientID: '725944494103833',
 	clientSecret: 'ac103298f55808bc0ec40f03a5e370b4',
-	callbackURL: 'http://ping-a-truck.herokuapp.com//facebook/callback'
+	callbackURL: 'http://ping-a-truck.herokuapp.com/facebook/callback'
 }, function(accessToken, refreshToken, profile, done){
 	UserModel.findOne({userid: profile.id}, function(err, user){
 		if(user){
