@@ -50,8 +50,14 @@ module.exports = {
 		});
 	},
 	dbDraw: function(req, res){
-		UserModel.find({ endTime: {$exists: true}, startTime: {$exists: true}, where: {$exists: true}},{ endTime: true, startTime: true, where: true}, function(err, doc){
+		UserModel.find({ 
+			endTime: {$exists: true}, 
+			startTime: {$exists: true}, 
+			where: {$exists: true},
+			{endTime: true, startTime: true, where: true}, 
+			function(err, doc){
 			console.log(doc);
+			res.send(doc);
 		});
 	}
 };
