@@ -46,7 +46,10 @@ module.exports = {
 	dbGet: function(req, res){
 		console.log('req.user.id:', req.user._id);
 		UserModel.findById(req.user._id, function(err,doc){
-			res.send(doc);
+			console.log(doc);
+		UserModel.find({ endTime: {$exists: true}, startTime: {$exists: true}, where: {$exists: true}},{ endTime: true, startTime: true, where: true}, function(err, doc){
+			console.log(doc);
+		});
 		});
 	}
 };
