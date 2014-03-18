@@ -13,7 +13,7 @@ passport.deserializeUser(function(userid, done){
 passport.use(new FacebookStrategy({
 	clientID: '524785800972097',
 	clientSecret: '1c0a3b9d4b50b6f9c8f24f2e27793e04',
-	callbackURL: 'http://localhost:3000/facebook/callback'
+	callbackURL: 'http://ping-a-truck.herokuapp.com//facebook/callback'
 }, function(accessToken, refreshToken, profile, done){
 	UserModel.findOne({userid: profile.id}, function(err, user){
 		if(user){
@@ -32,7 +32,7 @@ passport.use(new FacebookStrategy({
 passport.use(new GoogleStrategy({
     clientID: '844209823006.apps.googleusercontent.com',
     clientSecret: 'LSJoJGZmk_0ex33Rxhki8gtd',
-    callbackURL: "http://localhost:3000/oauth2callback"
+    callbackURL: "http://ping-a-truck.herokuapp.com/oauth2callback"
 },
    function(accessToken, refreshToken, profile, done) {
  		UserModel.findOne({ userid: profile.id }, function (err, user) {

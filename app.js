@@ -29,13 +29,13 @@ app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.session({
 	store: new MongoStore({
-		url: MONGOHQ_URL,
+		url: MONGOHQ_URL || 'mongodb://localhost/foodTruckUsers',
 		collection: 'users'
 	}),
 	secret: 'M0nk3y4SS'}));
 app.use(passport.initialize());
 app.use(passport.session());
-mongoose.connect(process.env.MONGOHQ_URL);
+mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/foodTruckUsers');
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res){
