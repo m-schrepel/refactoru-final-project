@@ -41,6 +41,14 @@ html {
 	-webkit-animation: pulse 3s;
 	display: none;
 }
+#success{
+	height:5%;
+	background-color: darkseagreen;
+	color: white;
+	text-align: center;
+	-webkit-animation: success 3s;
+	display: none;
+}
 #map-canvas {
 	height: 55vh;
 	width: 100%;
@@ -99,6 +107,20 @@ html {
 	}
 	100% {
 		background-color: red;
+	}
+}
+@-webkit-keyframes success {
+	0% {
+		background-color: lightgreen;
+	}
+	25% {
+		background-color: darkseagreen;
+	}
+	50% {
+		background-color: lightgreen;
+	}
+	100% {
+		background-color: darkseagreen;
 	}
 }
 #notify-window {

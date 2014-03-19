@@ -111,10 +111,13 @@ function initialize(e) {
         text: $('#user-phone-input').val()
       },
       success: function(){
-        alert('Success');
+      $('#success').slideToggle().delay(4500).slideToggle();
+      $('.notification-slider').slideToggle(750);
+
       }
     });
     e.preventDefault();
+
   });
   //Slider init with current hour to 4 hours from now
   $("#slider-el").rangeSlider({
