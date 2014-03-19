@@ -59,8 +59,8 @@ function initialize(e) {
         start: start(),
         end: end(),
         where: {
-          lat: people[0].where.lat(),
-          lng: people[0].where.lng()
+          A: people[0].where.lng(),
+          k: people[0].where.lat()
         }
       }
       $.post('/dbsubmit', data, function(){
@@ -156,8 +156,8 @@ function initialize(e) {
         start: start(),
         end: end(),
         where: {
-          lat: people[0].where.lat(),
-          lng: people[0].where.lng()
+          k: people[0].where.lat(),
+          A: people[0].where.lng()
         }
       }
       $.post('/dbsubmit', data, function(){

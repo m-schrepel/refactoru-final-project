@@ -29,11 +29,10 @@ module.exports = {
 	vendor2: function(req, res){
 		res.render('protectedvendor')
 	},
-	vendor3: function(req, res){
+	verifiedVendor: function(req, res){
 		res.render('fullvendor')
 	},
 	dbSave: function(req, res){
-		console.log(req.body);
 		req.user.where = req.body.where;
 		req.user.startTime = req.body.start;
 		req.user.endTime = req.body.end;
@@ -54,9 +53,15 @@ module.exports = {
 			endTime: {$exists: true}, 
 			startTime: {$exists: true}, 
 			where: {$exists: true}},
-			{endTime: true, startTime: true, where: true}, 
+			{endTime: true, 
+				startTime: true, 
+				where: true, 
+				notifyEmail: true, 
+				notifyText: true,
+				text: true,
+				email: true
+			}, 
 			function(err, doc){
-			console.log(doc);
 			res.send(doc);
 		});
 	},

@@ -28,7 +28,7 @@ module.exports = {
 	},
 	redirectCheck: function(req, res){
 	  	if (req.user.vendor === 3) {
-	  		res.redirect('/vendor3')
+	  		res.redirect('/truck')
 	  	}
 	  	else if (req.user.form || req.user.vendor === 2) {
 	  		res.redirect('/vendor2');
@@ -47,5 +47,10 @@ module.exports = {
 	securityElevate: function(req, res, next){
 		req.session.vendor = 1;
 		next();
+	},
+	vendorCheck: function(req, res){
+		if (req.user.vendor===3) {
+			res.render('fullvendor');
+		}
 	}
 }

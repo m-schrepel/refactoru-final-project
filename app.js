@@ -8,6 +8,7 @@ var indexController = require('./controllers/indexController');
 var authController = require('./controllers/authController');
 var app = express();
 var MongoStore = require('connect-mongo')(express);
+var client = require('twilio')('AC36c1de397283db095773dbcb9a8cc2d3', '72f4a97aeee50fc81fc99215b74ea886');
 
 
 
@@ -50,11 +51,12 @@ app.get('/dbDraw', indexController.dbDraw);
 app.get('/dbGet', indexController.dbGet);
 app.post('/dbsubmit', indexController.dbSave);
 app.post('/truck-submit', indexController.foodTruckCreate);
-app.get('/vendor2', indexController.vendor2);
+app.get('/vendor2', authController.ensureAuthenticated, indexController.vendor2);
 app.get('/vendor/login/facebook', authController.securityElevate, passport.authenticate('facebook'));
 app.get('/vendor/auth/google', authController.securityElevate, passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login', 
 	'https://www.googleapis.com/auth/userinfo.profile', 
 	'https://www.googleapis.com/auth/userinfo.email']}));
+app.get('/truck', authController.vendorCheck, indexController.verifiedVendor);
 app.get('/signup', indexController.signup);
 app.get('/signupform', indexController.formrender);
 app.get('/', authController.ensureAuthenticated, indexController.login);

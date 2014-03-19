@@ -11,8 +11,8 @@ var userSchema = new mongoose.Schema({
 	profile: Object,
 	vendor: Number,
 	where: {
-		lat: String,
-		lng: String
+		k: Number,
+		A: Number
 	},
 	startTime: String,
 	endTime: String,
