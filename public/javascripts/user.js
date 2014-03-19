@@ -20,9 +20,6 @@ function initialize(e) {
     var userName = doc.profile.displayName;
     $('#notify-text').text('Welcome '+userName)
   });
-  $.get('/dbDraw', function(doc, err){
-    console.log(doc);
-  });
   var mapOptions = {
     center: new google.maps.LatLng(37.77, -122.42),
     zoom: 13,
@@ -88,6 +85,37 @@ function initialize(e) {
       $('#error').slideToggle().delay(4500).slideToggle();
     }
   };
+  // Hidden drawer reveals on button click and populates user settings
+  $('#slider-pull').click(function(){
+    $.get('/dbGet', function(doc, err){
+      $('#user-email-input').val(doc.email);
+      $('#user-phone-input').val(doc.text);
+      if (doc.notifyText === true) {
+        $('#text-checkbox').prop('checked', true);
+      }
+      if (doc.notifyEmail === true) {
+        $('#email-checkbox').prop('checked', true);
+      }
+    });
+    $('.notification-slider').slideToggle(750);
+  });
+  // Ajax form submission
+  $('#notify-form').submit(function(e){
+    $.ajax({
+      url: '/notify',
+      type: 'POST',
+      data: {
+        notifyText: $('#text-checkbox').prop('checked'),
+        notifyEmail: $('#email-checkbox').prop('checked'),
+        email: $('#user-email-input').val(),
+        text: $('#user-phone-input').val()
+      },
+      success: function(){
+        alert('Success');
+      }
+    });
+    e.preventDefault();
+  });
   //Slider init with current hour to 4 hours from now
   $("#slider-el").rangeSlider({
     bounds: {
@@ -119,6 +147,20 @@ function initialize(e) {
    var center = map.getCenter();
    google.maps.event.trigger(map, "resize");
    map.setCenter(center); 
+  });
+  $("#slider-el").bind("userValuesChanged", function(e, data){
+    var data = {
+        start: start(),
+        end: end(),
+        where: {
+          lat: people[0].where.lat(),
+          lng: people[0].where.lng()
+        }
+      }
+      $.post('/dbsubmit', data, function(){
+      });
+    $.post('/dbsubmit', data, function(){
+    });  
   });
 }
 google.maps.event.addDomListener(window, 'load', initialize);

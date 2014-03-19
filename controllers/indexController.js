@@ -59,5 +59,13 @@ module.exports = {
 			console.log(doc);
 			res.send(doc);
 		});
+	},
+	notify: function(req, res){
+		req.user.notifyEmail = req.body.notifyEmail;
+		req.user.notifyText = req.body.notifyText;
+		req.user.email = req.body.email;
+		req.user.text = req.body.text;
+		req.user.save();
+		res.send(req.body);
 	}
 };

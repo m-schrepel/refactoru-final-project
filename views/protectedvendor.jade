@@ -1,6 +1,7 @@
 extends layout
 
 block content
+	div(id='error') You can drag the circle if you wish to change the location
 	div(id='notify-window')
 		ul(id="notify-list")
 	nav.nav-g.nav.stats
@@ -10,9 +11,7 @@ block content
 						img(id='ping-a-truck' src="/images/trucklrg.png")
 				li(id="site-name-nav") Ping a Truck
 				li(id="notify-right")
-					a(href="#" id="notify-label" class="label label-orange") 0
-					span(id="notify-text") Notifications | <a href='/logout' id='logout'> Logout
-					
+					span(id="notify-text") </span>| <a href='/logout' id='logout'> Logout</a>
 		.units-row
 			.unit-centered.unit-80
 				div(id='map-canvas')

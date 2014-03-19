@@ -13,17 +13,20 @@ block content
 				li(id="notify-right")
 					span(id="notify-text") </span>| <a href='/logout' id='logout'> Logout</a>
 		.units-row
+
 			.unit-centered.unit-80
+				button(id='slider-pull' class='btn btn-orange') Settings
+
 				div(id='map-canvas')
 				div(id='slider-el')
 				.notification-slider
-					form(action='/notify' method='post' class='forms')
+					form(action='/notify' method='post' class='forms' id='notify-form')
 						p.text-centered Do you want text notifications? 
-							<input type='checkbox'>
-						input(type='phone' placeholder='Enter Cell #' class='width-75 centered')
+							<input id='text-checkbox' type='checkbox' name='notifyText'>
+						input(id='user-phone-input' type='phone' placeholder='Enter Cell #' class='width-75 centered' name='text')
 						p.text-centered Do you want email notifications?
-							<input type='checkbox'>
-						input(type='email' placeholder='Enter Email' class='width-75 centered')
+							<input type='checkbox' id='email-checkbox' name='notifyEmail'>
+						input(id='user-email-input' type='email' placeholder='Enter Email' class='width-75 centered' name='email')
 						p
-						input(class='btn btn-centered width-50 btn-orange' type='submit')
+						input(id='notify-submit' class='btn btn-centered width-50 btn-orange' type='submit')
 		
