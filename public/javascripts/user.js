@@ -73,9 +73,13 @@ function initialize(e) {
           start: start(),
           end: end(),
           where: {
-            lat: people[0].where.lat(),
-            lng: people[0].where.lng()
-          }
+            A: people[0].where.lat(),
+            k: people[0].where.lng(),
+          },
+          notifyText: $('#text-checkbox').prop('checked'),
+          notifyEmail: $('#email-checkbox').prop('checked'),
+          email: $('#user-email-input').val(),
+          text: $('#user-phone-input').val()
         }
         $.post('/dbsubmit', data, function(){
         });
@@ -153,13 +157,17 @@ function initialize(e) {
   });
   $("#slider-el").bind("userValuesChanged", function(e, data){
     var data = {
-        start: start(),
-        end: end(),
-        where: {
-          k: people[0].where.lat(),
-          A: people[0].where.lng()
+          start: start(),
+          end: end(),
+          where: {
+            A: people[0].where.lat(),
+            k: people[0].where.lng(),
+          },
+          notifyText: $('#text-checkbox').prop('checked'),
+          notifyEmail: $('#email-checkbox').prop('checked'),
+          email: $('#user-email-input').val(),
+          text: $('#user-phone-input').val()
         }
-      }
       $.post('/dbsubmit', data, function(){
       });
     $.post('/dbsubmit', data, function(){

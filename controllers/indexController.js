@@ -52,7 +52,8 @@ module.exports = {
 		UserModel.find({ 
 			endTime: {$exists: true}, 
 			startTime: {$exists: true}, 
-			where: {$exists: true}},
+			where: {$exists: true},
+			vendor: {$not: {$exists: true}}},
 			{endTime: true, 
 				startTime: true, 
 				where: true, 
@@ -72,5 +73,13 @@ module.exports = {
 		req.user.text = req.body.text;
 		req.user.save();
 		res.send(req.body);
+	},
+	sendText: function(req, res){
+		res.send('k');
+
+	},
+	sendMail: function(req, res){
+		res.send('kk');
+
 	}
 };

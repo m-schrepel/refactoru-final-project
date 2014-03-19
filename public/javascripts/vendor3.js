@@ -3,13 +3,22 @@ var drawArray = [];
 var truckArray = [];
 var notifyArray = [];
 // Person class with relevant marker data and unique, possibly hilarious name
-var Foodtruck = function (where, truckName) {
+var Foodtruck = function (where, truckName, startTime, endTime) {
   this.truckName = truckName;
   this.where = where;
+  this.startTime = startTime;
+  this.endTime = endTime;
 }
-var Notify = function (userName, truckName) {
+var Notify = function (userName, truckName, truckstart, truckend, notifyEmail, notifyText, email, text) {
   this.userName = userName;
   this.truckName = truckName;
+  this.truckstart = truckstart;
+  this.truckend = truckend;
+  this.notifyEmail = notifyEmail;
+  this.notifyText = notifyText;
+  this.email = email;
+  this.text = text;
+
 }
 // Function that gets the start time and end time and returns a properly formatted time stamp
 start = function () {
@@ -50,42 +59,64 @@ function initialize() {
     };
     var addTruck = function(e) {
       var myLatlng = e.latLng;
-      new google.maps.Marker({
+      if (truckArray<1){
+      var truck = new google.maps.Marker({
         map: map,
         icon: image,
         draggable: true,
         position: myLatlng
       });
       var foodTruckName = $('#notify-text').text().slice(8)
-      var trucks = new Foodtruck (myLatlng, foodTruckName);
+      var trucks = new Foodtruck (myLatlng, foodTruckName, start(), end());
       truckArray.push(trucks)
-    };
+      var data = {
+          startTime: start(),
+          endTime: end(),
+          where: {
+            A: truckArray[0].where.lat(),
+            k: truckArray[0].where.lng(),
+          }
+      }
+      $.post('/dbsubmit', data, function(doc, err){
+
+      });
+    }
+    else {
+      $('#error').slideToggle().delay(4500).slideToggle();
+    }
+    google.maps.event.addDomListener(truck, 'dragend', truckDistanceCheck);
+    google.maps.event.addDomListener(truck, 'dragend', function(e){
+      var data = {
+        startTime: start(),
+        endTime: end(),
+        where: {
+            A: truckArray[0].where.lat(),
+            k: truckArray[0].where.lng(),
+          }
+      }
+      $.post('/dbsubmit', data, function(doc, err){
+
+      });
+    });
+  };
+
 // This function compares foodtruck to users and notifies if < 1000 meters and messes with notify
     var truckDistanceCheck = function() {      
       for (var i = 0; i < drawArray.length; i++) {
         var distanceBetween = google.maps.geometry.spherical.computeDistanceBetween(truckArray[0].where, drawArray[i].where);
         if (distanceBetween < 1000) {
           //ajax call here for the Twilio API to do its thing
-          var notifyLoop = new Notify (drawArray[i].email, truckArray[0].truckName);
+          $.post('/sendText', function(doc, err){
+            console.log(doc);
+          });
+          var notifyLoop = new Notify (drawArray[i].email, truckArray[0].truckName, truckArray[0].startTime, truckArray[0].endTime, drawArray[i].notifyEmail, drawArray[i].notifyText, drawArray[i].email, drawArray[i].text);
           notifyArray.push(notifyLoop);
         }
         else {
           console.log("sorry");
         }
       }
-    $('title').text(notifyArray.length + " notifications");
-    $("#notify-label").text(notifyArray.length);
-    $("#notify-label").addClass('active');
-    // truckArray.splice(0,1);
     };
-// Reset the notify field and pop up a div with the notify information
-    var notifyReset = function () {
-      $('#notify-label').removeClass("active");
-      $('#notify-label').text(0);
-      $('title').text("Google Maps Demo");
-      $('#notify-window').hide().children().empty();
-      notifyArray = [];
-    }
   //Slider init with current hour to 4 hours from now
     $("#slider-el").rangeSlider({
       bounds: {
@@ -111,7 +142,6 @@ function initialize() {
       }
     });
 // event listeners
-  $("#notify-label").click(notifyReset);
   google.maps.event.addDomListener(map, 'click', addTruck);
   google.maps.event.addDomListener(map, 'click', truckDistanceCheck);
   google.maps.event.addDomListener(window, "resize", function() {
@@ -139,7 +169,7 @@ function initialize() {
         var circles = new google.maps.Circle ({
           map: map,
           fillColor: "#F56D18",
-          center: new google.maps.LatLng(drawArray[i].where.k,drawArray[i].where.A),
+          center: new google.maps.LatLng(drawArray[i].where.A,drawArray[i].where.k),
           radius: 800,
           fillOpacity: .075,
           clickable: false,
