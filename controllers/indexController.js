@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var UserModel = require('../models/userModel');
+var client = require('twilio')('AC36c1de397283db095773dbcb9a8cc2d3', '72f4a97aeee50fc81fc99215b74ea886');
+
 module.exports = {
 	login: function(req, res){
 		res.render('login', {
@@ -43,7 +45,6 @@ module.exports = {
 
 	},
 	dbGet: function(req, res){
-		console.log('req.user.id:', req.user._id);
 		UserModel.findById(req.user._id, function(err,doc){
 			res.send(doc);
 		});
@@ -75,8 +76,17 @@ module.exports = {
 		res.send(req.body);
 	},
 	sendText: function(req, res){
-		res.send('k');
-
+		console.log('Number should be: '+req.body.text);
+		if (req.body.notifyText) {
+			client.messages.create({ 
+			to: req.body.text, 
+			from: "+14155287571", 
+			body: "Hey there " + req.body.username+", "+"the "+req.body.truckName+" is near you from "+req.body.truckstart+" to "+req.body.truckend    
+		}, function(err, message) { 
+			console.log(message.sid); 
+		});
+		res.send('k')
+		};
 	},
 	sendMail: function(req, res){
 		res.send('kk');

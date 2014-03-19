@@ -73,8 +73,8 @@ function initialize(e) {
           start: start(),
           end: end(),
           where: {
-            A: people[0].where.lat(),
-            k: people[0].where.lng(),
+            A: people[0].where.lng(),
+            k: people[0].where.lat(),
           },
           notifyText: $('#text-checkbox').prop('checked'),
           notifyEmail: $('#email-checkbox').prop('checked'),
@@ -160,8 +160,8 @@ function initialize(e) {
           start: start(),
           end: end(),
           where: {
-            A: people[0].where.lat(),
-            k: people[0].where.lng(),
+            A: people[0].where.lng(),
+            k: people[0].where.lat(),
           },
           notifyText: $('#text-checkbox').prop('checked'),
           notifyEmail: $('#email-checkbox').prop('checked'),

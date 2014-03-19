@@ -29,6 +29,14 @@ end = function() {
  var end = $('.ui-rangeSlider-rightLabel').find('.ui-rangeSlider-label-value').html();
  return moment(end, "h:mma")._d;
 };
+startText = function(){
+  var begin = $('.ui-rangeSlider-leftLabel').find('.ui-rangeSlider-label-value').html();
+  return moment(begin, "h:mm")._i;
+};
+endText = function(){
+   var end = $('.ui-rangeSlider-rightLabel').find('.ui-rangeSlider-label-value').html();
+   return moment(end, "h:mm")._i;
+}
 function initialize() {
   $.get('/dbGet', function(doc, err){
     $('#notify-text').text('Welcome '+ doc.form['food-truck-name']);
@@ -85,19 +93,7 @@ function initialize() {
       $('#error').slideToggle().delay(4500).slideToggle();
     }
     google.maps.event.addDomListener(truck, 'dragend', truckDistanceCheck);
-    google.maps.event.addDomListener(truck, 'dragend', function(e){
-      var data = {
-        startTime: start(),
-        endTime: end(),
-        where: {
-            A: truckArray[0].where.lat(),
-            k: truckArray[0].where.lng(),
-          }
-      }
-      $.post('/dbsubmit', data, function(doc, err){
-
-      });
-    });
+    google.maps.event.addDomListener(truck, 'dragend', addTruck);
   };
 
 // This function compares foodtruck to users and notifies if < 1000 meters and messes with notify
@@ -106,11 +102,22 @@ function initialize() {
         var distanceBetween = google.maps.geometry.spherical.computeDistanceBetween(truckArray[0].where, drawArray[i].where);
         if (distanceBetween < 1000) {
           //ajax call here for the Twilio API to do its thing
-          $.post('/sendText', function(doc, err){
-            console.log(doc);
-          });
           var notifyLoop = new Notify (drawArray[i].email, truckArray[0].truckName, truckArray[0].startTime, truckArray[0].endTime, drawArray[i].notifyEmail, drawArray[i].notifyText, drawArray[i].email, drawArray[i].text);
           notifyArray.push(notifyLoop);
+            $.ajax({
+              url: '/sendText',
+              data: {
+                email: notifyArray[i].email,
+                notifyEmail: notifyArray[i].notifyEmail,
+                notifyText: notifyArray[i].notifyText,
+                text: notifyArray[i].text,
+                truckName: notifyArray[i].truckName,
+                truckend: endText(),
+                truckstart: startText(),
+                username: notifyArray[i].email
+              },
+              type: 'POST'
+          });
         }
         else {
           console.log("sorry");
@@ -169,7 +176,7 @@ function initialize() {
         var circles = new google.maps.Circle ({
           map: map,
           fillColor: "#F56D18",
-          center: new google.maps.LatLng(drawArray[i].where.A,drawArray[i].where.k),
+          center: new google.maps.LatLng(drawArray[i].where.k,drawArray[i].where.A),
           radius: 800,
           fillOpacity: .075,
           clickable: false,
