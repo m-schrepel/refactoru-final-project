@@ -15,10 +15,6 @@ var client = require('twilio')('AC36c1de397283db095773dbcb9a8cc2d3', '72f4a97aee
 
 // all environments
 app.set('port', process.env.PORT || 5000);
-// var port = Number(process.env.PORT || 5000);
-// app.listen(port, function(){
-// 	console.log('listening on ' + port);
-// });
 var MONGOHQ_URL="mongodb://heroku:U-Fl5kqnEiBkgSmkSirSXF-Z2Twy6BHmMMALPUOz9oiodGjKTPtPdVDVrFpxSwzkE14xVGmHFhAgAAs6g1eMJQ@oceanic.mongohq.com:10098/app23118522"
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
