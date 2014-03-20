@@ -82,7 +82,7 @@ module.exports = {
 			body: "Hey there " + req.body.username+", "+"the "+req.body.truckName+" is near you from "+req.body.truckstart+" to "+req.body.truckend    
 			}, 
 			function(err, message) { 
-			console.log(message.sid); 
+			console.log(err, message); 
 		});
 		res.send('k');
 	},
