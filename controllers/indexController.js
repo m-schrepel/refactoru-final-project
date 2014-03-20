@@ -77,7 +77,6 @@ module.exports = {
 	},
 	sendText: function(req, res){
 		console.log('Number should be: '+req.body.text);
-		if (req.body.notifyText) {
 			client.messages.create({ 
 			to: req.body.text, 
 			from: "+14155287571", 
@@ -86,7 +85,6 @@ module.exports = {
 			console.log(message.sid); 
 		});
 		res.send('k')
-		}
 	},
 	sendMail: function(req, res){
 		res.send('kk');
