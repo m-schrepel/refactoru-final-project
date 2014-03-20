@@ -76,15 +76,15 @@ module.exports = {
 		res.send(req.body);
 	},
 	sendText: function(req, res){
-		console.log('Number should be: '+req.body.text);
 			client.messages.create({ 
 			to: req.body.text, 
 			from: "+14155287571", 
 			body: "Hey there " + req.body.username+", "+"the "+req.body.truckName+" is near you from "+req.body.truckstart+" to "+req.body.truckend    
-		}, function(err, message) { 
+			}, 
+			function(err, message) { 
 			console.log(message.sid); 
 		});
-		res.send('k')
+		res.send('k');
 	},
 	sendMail: function(req, res){
 		res.send('kk');
