@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var UserModel = require('../models/userModel');
-var sys = require('sys');
-TwilioClient = require('twilio').Client;
-client = new TwilioClient('AC36c1de397283db095773dbcb9a8cc2d3', '72f4a97aeee50fc81fc99215b74ea886');
+var client = require('twilio')('AC36c1de397283db095773dbcb9a8cc2d3', '72f4a97aeee50fc81fc99215b74ea886');
 
 module.exports = {
 	login: function(req, res){
