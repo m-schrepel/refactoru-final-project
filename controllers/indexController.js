@@ -86,7 +86,7 @@ module.exports = {
 			console.log(message.sid); 
 		});
 		res.send('k')
-		};
+		}
 	},
 	sendMail: function(req, res){
 		res.send('kk');
